@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_7f6f657f7a3f84eba7adaead60480c9a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed; 
+top: 20px; right: 20px; width: 150px; 
+background-color: white;
+border:2px solid grey;
+z-index:9999;
+font-size:12px;
+padding: 10px;
+">
+<b>Kategori Demand</b><br>
+<i style="color:red;">●</i> High Demand<br>
+<i style="color:orange;">●</i> Medium Demand<br>
+<i style="color:green;">●</i> Low Demand
+</div>
+    
+            <div class="folium-map" id="map_7f6f657f7a3f84eba7adaead60480c9a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_7f6f657f7a3f84eba7adaead60480c9a = L.map(
+                "map_7f6f657f7a3f84eba7adaead60480c9a",
+                {
+                    center: [-7.26, 112.77],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_7a6d3daa06ba2ff914dbcb38a27315ba = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_7a6d3daa06ba2ff914dbcb38a27315ba.addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+            var circle_marker_82d117b60932ac28128a465abf26b926 = L.circleMarker(
+                [-7.265, 112.747],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_800c220189fac5b6d730af4de8b52d8f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7560fe19d65d13d329a819d9b2839114 = $(`<div id="html_7560fe19d65d13d329a819d9b2839114" style="width: 100.0%; height: 100.0%;">             <b>GENTENG</b><br><br>             Pasang Baru: 0<br>             Tambah Daya: 0<br>             Total: 0<br><br>             <b>Kategori: Low Demand</b>             </div>`)[0];
+                popup_800c220189fac5b6d730af4de8b52d8f.setContent(html_7560fe19d65d13d329a819d9b2839114);
+            
+        
+
+        circle_marker_82d117b60932ac28128a465abf26b926.bindPopup(popup_800c220189fac5b6d730af4de8b52d8f)
+        ;
+
+        
+    
+    
+            var circle_marker_c86a7a4144595f37c559260506fe7d0f = L.circleMarker(
+                [-7.276, 112.758],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_b9c263a688b97747f1102ab6f8e9d4db = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c57a523c20bb8b980fcc8f555a171c7d = $(`<div id="html_c57a523c20bb8b980fcc8f555a171c7d" style="width: 100.0%; height: 100.0%;">             <b>GUBENG</b><br><br>             Pasang Baru: 0<br>             Tambah Daya: 0<br>             Total: 0<br><br>             <b>Kategori: Low Demand</b>             </div>`)[0];
+                popup_b9c263a688b97747f1102ab6f8e9d4db.setContent(html_c57a523c20bb8b980fcc8f555a171c7d);
+            
+        
+
+        circle_marker_c86a7a4144595f37c559260506fe7d0f.bindPopup(popup_b9c263a688b97747f1102ab6f8e9d4db)
+        ;
+
+        
+    
+    
+            var circle_marker_e2464f827f4dd0f26325a0f557aea7e3 = L.circleMarker(
+                [-7.235, 112.8],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_0d8dd35c2b006ff632ba5c1aef05ae28 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_089925c16aecd58a3bfb568c2c62de69 = $(`<div id="html_089925c16aecd58a3bfb568c2c62de69" style="width: 100.0%; height: 100.0%;">             <b>KENJERAN</b><br><br>             Pasang Baru: 0<br>             Tambah Daya: 0<br>             Total: 0<br><br>             <b>Kategori: Low Demand</b>             </div>`)[0];
+                popup_0d8dd35c2b006ff632ba5c1aef05ae28.setContent(html_089925c16aecd58a3bfb568c2c62de69);
+            
+        
+
+        circle_marker_e2464f827f4dd0f26325a0f557aea7e3.bindPopup(popup_0d8dd35c2b006ff632ba5c1aef05ae28)
+        ;
+
+        
+    
+    
+            var circle_marker_b2d55d4aa90ab9f4a2b20fe9316d8721 = L.circleMarker(
+                [-7.275, 112.785],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.405, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_13fdb697f2047899ad7d82227d1b8597 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c2e25c7018b0c9f4f5853ce2d7a10a5e = $(`<div id="html_c2e25c7018b0c9f4f5853ce2d7a10a5e" style="width: 100.0%; height: 100.0%;">             <b>MULYOREJO</b><br><br>             Pasang Baru: 2081<br>             Tambah Daya: 0<br>             Total: 2081<br><br>             <b>Kategori: High Demand</b>             </div>`)[0];
+                popup_13fdb697f2047899ad7d82227d1b8597.setContent(html_c2e25c7018b0c9f4f5853ce2d7a10a5e);
+            
+        
+
+        circle_marker_b2d55d4aa90ab9f4a2b20fe9316d8721.bindPopup(popup_13fdb697f2047899ad7d82227d1b8597)
+        ;
+
+        
+    
+    
+            var circle_marker_e64923983c8c801afbc9855a337336b1 = L.circleMarker(
+                [-7.245, 112.75],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.45, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_41d7db03ca0999f9858af45b5aaa9433 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f8ad916734d66e76b83e365870e8c398 = $(`<div id="html_f8ad916734d66e76b83e365870e8c398" style="width: 100.0%; height: 100.0%;">             <b>SIMOKERTO</b><br><br>             Pasang Baru: 90<br>             Tambah Daya: 0<br>             Total: 90<br><br>             <b>Kategori: Medium Demand</b>             </div>`)[0];
+                popup_41d7db03ca0999f9858af45b5aaa9433.setContent(html_f8ad916734d66e76b83e365870e8c398);
+            
+        
+
+        circle_marker_e64923983c8c801afbc9855a337336b1.bindPopup(popup_41d7db03ca0999f9858af45b5aaa9433)
+        ;
+
+        
+    
+    
+            var circle_marker_b94f6570e351906ecfdbfe34caa95ef4 = L.circleMarker(
+                [-7.255, 112.76],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.3, "stroke": true, "weight": 3}
+            ).addTo(map_7f6f657f7a3f84eba7adaead60480c9a);
+        
+    
+        var popup_cc17caec9f4a6b8e9b2e017dab291603 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_be35a8e647520ea0967d3b52f4c3615f = $(`<div id="html_be35a8e647520ea0967d3b52f4c3615f" style="width: 100.0%; height: 100.0%;">             <b>TAMBAKSARI</b><br><br>             Pasang Baru: 1460<br>             Tambah Daya: 0<br>             Total: 1460<br><br>             <b>Kategori: High Demand</b>             </div>`)[0];
+                popup_cc17caec9f4a6b8e9b2e017dab291603.setContent(html_be35a8e647520ea0967d3b52f4c3615f);
+            
+        
+
+        circle_marker_b94f6570e351906ecfdbfe34caa95ef4.bindPopup(popup_cc17caec9f4a6b8e9b2e017dab291603)
+        ;
+
+        
+    
+</script>
+</html>

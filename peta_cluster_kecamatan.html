@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_08267c6eec0ccfc16bce11eb65ea576e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+top: 20px;
+right: 20px;
+width: 170px;
+background-color: white;
+border:2px solid grey;
+z-index:9999;
+font-size:12px;
+padding: 10px;
+">
+
+<b>Cluster Demand</b><br><br>
+
+<i style="color:red;">●</i>
+High Demand<br>
+
+<i style="color:orange;">●</i>
+Medium Demand<br>
+
+<i style="color:green;">●</i>
+Low Demand
+
+</div>
+    
+            <div class="folium-map" id="map_08267c6eec0ccfc16bce11eb65ea576e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_08267c6eec0ccfc16bce11eb65ea576e = L.map(
+                "map_08267c6eec0ccfc16bce11eb65ea576e",
+                {
+                    center: [-7.26, 112.77],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b3459a20487b6feb11ebdd186e99f262 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+        
+    
+            tile_layer_b3459a20487b6feb11ebdd186e99f262.addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+            var circle_marker_e7edd8a12981817ba55fb1e33cd5f163 = L.circleMarker(
+                [-7.265, 112.747],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.005, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_5c49d32fad6935b64aad9a96cd7805ac = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7cf27970426072c64395bbd89d03a067 = $(`<div id="html_7cf27970426072c64395bbd89d03a067" style="width: 100.0%; height: 100.0%;">         <b>GENTENG</b><br><br>          <b>Kategori:</b>         High Demand<br><br>          Total Permohonan:         1<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         3300.0         </div>`)[0];
+                popup_5c49d32fad6935b64aad9a96cd7805ac.setContent(html_7cf27970426072c64395bbd89d03a067);
+            
+        
+
+        circle_marker_e7edd8a12981817ba55fb1e33cd5f163.bindPopup(popup_5c49d32fad6935b64aad9a96cd7805ac)
+        ;
+
+        
+    
+    
+            var circle_marker_869758121773f7e8203e47c7bad9a2a0 = L.circleMarker(
+                [-7.276, 112.758],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.825, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_acf490bb828a031bd013e62f37616d62 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a85f1d16f799c545d8c00dce1140e7c4 = $(`<div id="html_a85f1d16f799c545d8c00dce1140e7c4" style="width: 100.0%; height: 100.0%;">         <b>GUBENG</b><br><br>          <b>Kategori:</b>         Medium Demand<br><br>          Total Permohonan:         165<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         1247.27         </div>`)[0];
+                popup_acf490bb828a031bd013e62f37616d62.setContent(html_a85f1d16f799c545d8c00dce1140e7c4);
+            
+        
+
+        circle_marker_869758121773f7e8203e47c7bad9a2a0.bindPopup(popup_acf490bb828a031bd013e62f37616d62)
+        ;
+
+        
+    
+    
+            var circle_marker_69e5ad8bf8df6081219ab7978c8ed392 = L.circleMarker(
+                [-7.235, 112.8],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.005, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_8148837fe7384aae0e0a6816435a2686 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7254a260ba4907fa73a29855109b109d = $(`<div id="html_7254a260ba4907fa73a29855109b109d" style="width: 100.0%; height: 100.0%;">         <b>KENJERAN</b><br><br>          <b>Kategori:</b>         Medium Demand<br><br>          Total Permohonan:         1<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         0.0         </div>`)[0];
+                popup_8148837fe7384aae0e0a6816435a2686.setContent(html_7254a260ba4907fa73a29855109b109d);
+            
+        
+
+        circle_marker_69e5ad8bf8df6081219ab7978c8ed392.bindPopup(popup_8148837fe7384aae0e0a6816435a2686)
+        ;
+
+        
+    
+    
+            var circle_marker_416b846c78038ff97cf3fcec03977177 = L.circleMarker(
+                [-7.275, 112.785],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.005, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_fcbb056bdb08c0aee315e2333f1cd222 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_19a84492016287a9a3cb033499672e30 = $(`<div id="html_19a84492016287a9a3cb033499672e30" style="width: 100.0%; height: 100.0%;">         <b>MULYOREJO</b><br><br>          <b>Kategori:</b>         Low Demand<br><br>          Total Permohonan:         3401<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         2191.74         </div>`)[0];
+                popup_fcbb056bdb08c0aee315e2333f1cd222.setContent(html_19a84492016287a9a3cb033499672e30);
+            
+        
+
+        circle_marker_416b846c78038ff97cf3fcec03977177.bindPopup(popup_fcbb056bdb08c0aee315e2333f1cd222)
+        ;
+
+        
+    
+    
+            var circle_marker_b71635c98cd1efc8e14e9901aabcba69 = L.circleMarker(
+                [-7.245, 112.75],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 1.225, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_fc35bbc17150388f7672e8346655e9e1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0be91d589a7ec35daeb7b545db7416d9 = $(`<div id="html_0be91d589a7ec35daeb7b545db7416d9" style="width: 100.0%; height: 100.0%;">         <b>SIMOKERTO</b><br><br>          <b>Kategori:</b>         Medium Demand<br><br>          Total Permohonan:         245<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         946.12         </div>`)[0];
+                popup_fc35bbc17150388f7672e8346655e9e1.setContent(html_0be91d589a7ec35daeb7b545db7416d9);
+            
+        
+
+        circle_marker_b71635c98cd1efc8e14e9901aabcba69.bindPopup(popup_fc35bbc17150388f7672e8346655e9e1)
+        ;
+
+        
+    
+    
+            var circle_marker_8539ef837ada38f841fad52687fab2fa = L.circleMarker(
+                [-7.255, 112.76],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.46, "stroke": true, "weight": 3}
+            ).addTo(map_08267c6eec0ccfc16bce11eb65ea576e);
+        
+    
+        var popup_c19a83ab3d107eef45a849ffb590189f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8b8a49a047bf1b734883369784ea8a74 = $(`<div id="html_8b8a49a047bf1b734883369784ea8a74" style="width: 100.0%; height: 100.0%;">         <b>TAMBAKSARI</b><br><br>          <b>Kategori:</b>         Low Demand<br><br>          Total Permohonan:         3092<br>          Pasang Baru:         0.0<br>          Tambah Daya:         0.0<br>          Rata-rata Selisih Daya:         1191.01         </div>`)[0];
+                popup_c19a83ab3d107eef45a849ffb590189f.setContent(html_8b8a49a047bf1b734883369784ea8a74);
+            
+        
+
+        circle_marker_8539ef837ada38f841fad52687fab2fa.bindPopup(popup_c19a83ab3d107eef45a849ffb590189f)
+        ;
+
+        
+    
+</script>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_8a573ac2edd9a03e0bdb87f3c418f0a2 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_8a573ac2edd9a03e0bdb87f3c418f0a2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_8a573ac2edd9a03e0bdb87f3c418f0a2 = L.map(
+                "map_8a573ac2edd9a03e0bdb87f3c418f0a2",
+                {
+                    center: [-7.26, 112.77],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_129dd9a8365a8d4fb699122c9cbbdb39 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_129dd9a8365a8d4fb699122c9cbbdb39.addTo(map_8a573ac2edd9a03e0bdb87f3c418f0a2);
+        
+    
+            var feature_group_c2008620913a102b9dc113abd38b7a14 = L.featureGroup(
+                {}
+            );
+        
+    
+            var circle_marker_88a943241d0ad7b31f2633ceb9a42e29 = L.circleMarker(
+                [-7.275, 112.785],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.405, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c2008620913a102b9dc113abd38b7a14);
+        
+    
+        var popup_833c5221822ba979db3a81bfd6403509 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_74a8de1ab91354343ba07e6be798f2c5 = $(`<div id="html_74a8de1ab91354343ba07e6be798f2c5" style="width: 100.0%; height: 100.0%;">MULYOREJO (PASANG BARU): 2081</div>`)[0];
+                popup_833c5221822ba979db3a81bfd6403509.setContent(html_74a8de1ab91354343ba07e6be798f2c5);
+            
+        
+
+        circle_marker_88a943241d0ad7b31f2633ceb9a42e29.bindPopup(popup_833c5221822ba979db3a81bfd6403509)
+        ;
+
+        
+    
+    
+            var circle_marker_868524fd41c7b57c6a63649344eef71d = L.circleMarker(
+                [-7.255, 112.76],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.3, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c2008620913a102b9dc113abd38b7a14);
+        
+    
+        var popup_3d5a020e57dc630d9e0cffc0622a1d42 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8448505d63261570d171b168104d2e62 = $(`<div id="html_8448505d63261570d171b168104d2e62" style="width: 100.0%; height: 100.0%;">TAMBAKSARI (PASANG BARU): 1460</div>`)[0];
+                popup_3d5a020e57dc630d9e0cffc0622a1d42.setContent(html_8448505d63261570d171b168104d2e62);
+            
+        
+
+        circle_marker_868524fd41c7b57c6a63649344eef71d.bindPopup(popup_3d5a020e57dc630d9e0cffc0622a1d42)
+        ;
+
+        
+    
+    
+            var circle_marker_aeba645b6da0d8db2052c92672160910 = L.circleMarker(
+                [-7.245, 112.75],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.45, "stroke": true, "weight": 3}
+            ).addTo(feature_group_c2008620913a102b9dc113abd38b7a14);
+        
+    
+        var popup_ac5ff092b5f88b9de1f221158fea78fb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cd22776287ad101c68585171127145f8 = $(`<div id="html_cd22776287ad101c68585171127145f8" style="width: 100.0%; height: 100.0%;">SIMOKERTO (PASANG BARU): 90</div>`)[0];
+                popup_ac5ff092b5f88b9de1f221158fea78fb.setContent(html_cd22776287ad101c68585171127145f8);
+            
+        
+
+        circle_marker_aeba645b6da0d8db2052c92672160910.bindPopup(popup_ac5ff092b5f88b9de1f221158fea78fb)
+        ;
+
+        
+    
+    
+            feature_group_c2008620913a102b9dc113abd38b7a14.addTo(map_8a573ac2edd9a03e0bdb87f3c418f0a2);
+        
+    
+            var feature_group_43f336b1f35ab500c6e1a9fc6ed8b9e9 = L.featureGroup(
+                {}
+            );
+        
+    
+            feature_group_43f336b1f35ab500c6e1a9fc6ed8b9e9.addTo(map_8a573ac2edd9a03e0bdb87f3c418f0a2);
+        
+    
+            var layer_control_132e17ed2e35d7daf18a9abbc125178d_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_129dd9a8365a8d4fb699122c9cbbdb39,
+                },
+                overlays :  {
+                    "PASANG BARU" : feature_group_c2008620913a102b9dc113abd38b7a14,
+                    "TAMBAH DAYA" : feature_group_43f336b1f35ab500c6e1a9fc6ed8b9e9,
+                },
+            };
+            let layer_control_132e17ed2e35d7daf18a9abbc125178d = L.control.layers(
+                layer_control_132e17ed2e35d7daf18a9abbc125178d_layers.base_layers,
+                layer_control_132e17ed2e35d7daf18a9abbc125178d_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_8a573ac2edd9a03e0bdb87f3c418f0a2);
+
+        
+</script>
+</html>

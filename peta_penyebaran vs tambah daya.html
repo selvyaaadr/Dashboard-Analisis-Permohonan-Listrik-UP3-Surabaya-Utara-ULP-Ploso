@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1ad01185dec4f91f56697a6b4e440bd1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_1ad01185dec4f91f56697a6b4e440bd1" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1ad01185dec4f91f56697a6b4e440bd1 = L.map(
+                "map_1ad01185dec4f91f56697a6b4e440bd1",
+                {
+                    center: [-7.26, 112.77],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f8655d202ff64d18eb7c248e35b97e49 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_f8655d202ff64d18eb7c248e35b97e49.addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+            var circle_marker_efd85d150b40b4cacae2d5769bacef41 = L.circleMarker(
+                [-7.265, 112.747],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_5a1ef7750a5aa2e3993bd924f99eecb6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e876ca1384105cb610b952d71d3eef64 = $(`<div id="html_e876ca1384105cb610b952d71d3eef64" style="width: 100.0%; height: 100.0%;">             <b>GENTENG</b><br><br>             Pasang Baru: 0 (nan%)<br>             Tambah Daya: 0 (nan%)<br><br>             <b>Dominasi: Seimbang</b><br>             Total: 0             </div>`)[0];
+                popup_5a1ef7750a5aa2e3993bd924f99eecb6.setContent(html_e876ca1384105cb610b952d71d3eef64);
+            
+        
+
+        circle_marker_efd85d150b40b4cacae2d5769bacef41.bindPopup(popup_5a1ef7750a5aa2e3993bd924f99eecb6)
+        ;
+
+        
+    
+    
+            var circle_marker_e9c7b227c8d4426f13c1900c3c5657a6 = L.circleMarker(
+                [-7.276, 112.758],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_9248d6c8c429a279d58a6924b582c7c5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ca5ed0b5559af478527de968993a567f = $(`<div id="html_ca5ed0b5559af478527de968993a567f" style="width: 100.0%; height: 100.0%;">             <b>GUBENG</b><br><br>             Pasang Baru: 0 (nan%)<br>             Tambah Daya: 0 (nan%)<br><br>             <b>Dominasi: Seimbang</b><br>             Total: 0             </div>`)[0];
+                popup_9248d6c8c429a279d58a6924b582c7c5.setContent(html_ca5ed0b5559af478527de968993a567f);
+            
+        
+
+        circle_marker_e9c7b227c8d4426f13c1900c3c5657a6.bindPopup(popup_9248d6c8c429a279d58a6924b582c7c5)
+        ;
+
+        
+    
+    
+            var circle_marker_63e129febbf888abe202bf9accd39d1b = L.circleMarker(
+                [-7.235, 112.8],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_f42907a98e35a78a74b50d3dda49a56c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f154243543b3a0e5872672130313a84b = $(`<div id="html_f154243543b3a0e5872672130313a84b" style="width: 100.0%; height: 100.0%;">             <b>KENJERAN</b><br><br>             Pasang Baru: 0 (nan%)<br>             Tambah Daya: 0 (nan%)<br><br>             <b>Dominasi: Seimbang</b><br>             Total: 0             </div>`)[0];
+                popup_f42907a98e35a78a74b50d3dda49a56c.setContent(html_f154243543b3a0e5872672130313a84b);
+            
+        
+
+        circle_marker_63e129febbf888abe202bf9accd39d1b.bindPopup(popup_f42907a98e35a78a74b50d3dda49a56c)
+        ;
+
+        
+    
+    
+            var circle_marker_3e779d142d85c9e195d893d663901cb5 = L.circleMarker(
+                [-7.275, 112.785],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.405, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_7fd579b14dab1d40df67190521f5aa80 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a736fe073c519be5934ea2f4b062b534 = $(`<div id="html_a736fe073c519be5934ea2f4b062b534" style="width: 100.0%; height: 100.0%;">             <b>MULYOREJO</b><br><br>             Pasang Baru: 2081 (100.0%)<br>             Tambah Daya: 0 (0.0%)<br><br>             <b>Dominasi: Pasang Baru</b><br>             Total: 2081             </div>`)[0];
+                popup_7fd579b14dab1d40df67190521f5aa80.setContent(html_a736fe073c519be5934ea2f4b062b534);
+            
+        
+
+        circle_marker_3e779d142d85c9e195d893d663901cb5.bindPopup(popup_7fd579b14dab1d40df67190521f5aa80)
+        ;
+
+        
+    
+    
+            var circle_marker_8e45081c93c165a13a44af27b5bd7391 = L.circleMarker(
+                [-7.245, 112.75],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 0.45, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_ed34f8bcc792d57bd5cf3cfbded4a90e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b127894c495e6b267330ad21f4a8dfa3 = $(`<div id="html_b127894c495e6b267330ad21f4a8dfa3" style="width: 100.0%; height: 100.0%;">             <b>SIMOKERTO</b><br><br>             Pasang Baru: 90 (100.0%)<br>             Tambah Daya: 0 (0.0%)<br><br>             <b>Dominasi: Pasang Baru</b><br>             Total: 90             </div>`)[0];
+                popup_ed34f8bcc792d57bd5cf3cfbded4a90e.setContent(html_b127894c495e6b267330ad21f4a8dfa3);
+            
+        
+
+        circle_marker_8e45081c93c165a13a44af27b5bd7391.bindPopup(popup_ed34f8bcc792d57bd5cf3cfbded4a90e)
+        ;
+
+        
+    
+    
+            var circle_marker_d7c1afff7427caccbd89b8bd11853a1e = L.circleMarker(
+                [-7.255, 112.76],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.3, "stroke": true, "weight": 3}
+            ).addTo(map_1ad01185dec4f91f56697a6b4e440bd1);
+        
+    
+        var popup_5a9ad5c49260399e8c0d1e9637b72461 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9f5a6a0e904fb2fafda3f550e2bc4135 = $(`<div id="html_9f5a6a0e904fb2fafda3f550e2bc4135" style="width: 100.0%; height: 100.0%;">             <b>TAMBAKSARI</b><br><br>             Pasang Baru: 1460 (100.0%)<br>             Tambah Daya: 0 (0.0%)<br><br>             <b>Dominasi: Pasang Baru</b><br>             Total: 1460             </div>`)[0];
+                popup_5a9ad5c49260399e8c0d1e9637b72461.setContent(html_9f5a6a0e904fb2fafda3f550e2bc4135);
+            
+        
+
+        circle_marker_d7c1afff7427caccbd89b8bd11853a1e.bindPopup(popup_5a9ad5c49260399e8c0d1e9637b72461)
+        ;
+
+        
+    
+</script>
+</html>
