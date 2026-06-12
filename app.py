@@ -8,10 +8,15 @@ import plotly.graph_objects as go
 import folium
 from streamlit_folium import st_folium
 from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import silhouette_score
+from sklearn.neural_network import MLPRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 import networkx as nx
 from datetime import datetime
+import warnings
+warnings.filterwarnings('ignore')
 
 # ─────────────────────────────────────────
 # KONFIGURASI HALAMAN
@@ -258,6 +263,376 @@ with tab1:
             f"📉 **Bulan Terendah:** {MAPPING_BULAN.get(int(bln_min['bulan']), '?')} "
             f"– {int(bln_min['jumlah_permohonan']):,} permohonan"
         )
+
+    # ═══════════════════════════════════════════════════════════════════
+    # PEMBELAJARAN MESIN LANJUT – DEEP LEARNING (sesuai RPS UNESA 2024)
+    # Materi: ANN/MLP (Minggu 1-5), Regularisasi (Minggu 6-7),
+    #         Representation Learning / Autoencoder (Minggu 9-11)
+    # ═══════════════════════════════════════════════════════════════════
+    st.divider()
+    st.subheader("🧠 Deep Learning – Analisis Lanjut Data Temporal")
+
+    dl_tab1, dl_tab2, dl_tab3 = st.tabs([
+        "⚡ MLP Forecasting",
+        "🔧 Regularisasi & Training Curve",
+        "🔍 Anomaly Detection (Autoencoder)",
+    ])
+
+    # ── Persiapan data bersama ────────────────────────────────────────
+    pb_monthly = (
+        df_f.groupby('bulan')
+        .size()
+        .reset_index(name='jumlah')
+        .sort_values('bulan')
+    )
+
+    # ─────────────────────────────────────────────────────────────────
+    # DL-TAB 1 · MLP Forecasting (ANN/DNN – Minggu 1-5)
+    # Konsep: Multi-Layer Perceptron, Backpropagation, Forward pass
+    # ─────────────────────────────────────────────────────────────────
+    with dl_tab1:
+        if len(pb_monthly) < 5:
+            st.warning("Data tidak cukup untuk melatih MLP (minimal 5 bulan).")
+        else:
+            # ── Feature engineering ──────────────────────────────────
+            df_dl = pb_monthly.copy()
+            df_dl['lag_1']   = df_dl['jumlah'].shift(1)
+            df_dl['lag_2']   = df_dl['jumlah'].shift(2)
+            df_dl['mav_3']   = df_dl['jumlah'].rolling(3, min_periods=1).mean().shift(1)
+            df_dl = df_dl.dropna()
+
+            X_dl = df_dl[['bulan', 'lag_1', 'lag_2', 'mav_3']].values
+            y_dl = df_dl['jumlah'].values
+
+            # Normalisasi (MinMaxScaler) – penting untuk ANN
+            scaler_X = MinMaxScaler()
+            scaler_y = MinMaxScaler()
+            X_scaled_dl = scaler_X.fit_transform(X_dl)
+            y_scaled_dl = scaler_y.fit_transform(y_dl.reshape(-1, 1)).ravel()
+
+            # ── Konfigurasi arsitektur MLP ────────────────────────────
+            st.markdown("##### ⚙️ Konfigurasi Arsitektur MLP")
+            col_arch1, col_arch2, col_arch3 = st.columns(3)
+            with col_arch1:
+                hidden_1 = st.selectbox("Hidden Layer 1 (neuron)", [16, 32, 64, 128], index=1)
+            with col_arch2:
+                hidden_2 = st.selectbox("Hidden Layer 2 (neuron)", [0, 8, 16, 32], index=2)
+            with col_arch3:
+                max_iter_mlp = st.slider("Max Iterasi (Epoch)", 100, 1000, 300, step=50)
+
+            hidden_layers = (hidden_1,) if hidden_2 == 0 else (hidden_1, hidden_2)
+
+            # ── Training MLP ──────────────────────────────────────────
+            mlp = MLPRegressor(
+                hidden_layer_sizes=hidden_layers,
+                activation='relu',
+                solver='adam',
+                max_iter=max_iter_mlp,
+                random_state=42,
+                early_stopping=False,
+                learning_rate_init=0.001,
+            )
+            mlp.fit(X_scaled_dl, y_scaled_dl)
+
+            y_pred_scaled = mlp.predict(X_scaled_dl)
+            y_pred_dl = scaler_y.inverse_transform(y_pred_scaled.reshape(-1, 1)).ravel()
+            y_actual  = y_dl
+
+            rmse_mlp = np.sqrt(mean_squared_error(y_actual, y_pred_dl))
+            mae_mlp  = mean_absolute_error(y_actual, y_pred_dl)
+
+            # ── Prediksi n bulan ke depan ─────────────────────────────
+            st.markdown("##### 📅 Prediksi Bulan ke Depan")
+            n_forecast = st.slider("Jumlah bulan prediksi", 1, 6, 3)
+
+            forecast_vals = list(y_dl)
+            last_bulan    = int(df_dl['bulan'].iloc[-1])
+
+            for i in range(n_forecast):
+                b       = (last_bulan + i) % 12 + 1
+                lag1    = forecast_vals[-1]
+                lag2    = forecast_vals[-2]
+                mav     = np.mean(forecast_vals[-3:])
+                x_new   = scaler_X.transform([[b, lag1, lag2, mav]])
+                y_new   = scaler_y.inverse_transform(mlp.predict(x_new).reshape(-1, 1))[0][0]
+                forecast_vals.append(max(0, y_new))
+
+            forecast_only = forecast_vals[len(y_dl):]
+            bulan_fc      = [(last_bulan + i) % 12 + 1 for i in range(1, n_forecast + 1)]
+            nama_fc       = [MAPPING_BULAN.get(b, str(b)) for b in bulan_fc]
+
+            # ── Plot hasil ────────────────────────────────────────────
+            fig_mlp = go.Figure()
+            fig_mlp.add_trace(go.Scatter(
+                x=df_dl['bulan'].tolist(),
+                y=y_actual.tolist(),
+                mode='lines+markers',
+                name='Aktual',
+                line=dict(color='royalblue', width=2),
+            ))
+            fig_mlp.add_trace(go.Scatter(
+                x=df_dl['bulan'].tolist(),
+                y=y_pred_dl.tolist(),
+                mode='lines+markers',
+                name='Prediksi MLP (train)',
+                line=dict(color='orange', dash='dash', width=2),
+            ))
+            fig_mlp.add_trace(go.Scatter(
+                x=bulan_fc,
+                y=forecast_only,
+                mode='lines+markers',
+                name='Forecast',
+                line=dict(color='green', dash='dot', width=2),
+                marker=dict(symbol='star', size=10),
+            ))
+            fig_mlp.update_layout(
+                title=f"MLP Forecasting – Arsitektur {hidden_layers}",
+                xaxis_title="Bulan",
+                yaxis_title="Jumlah Permohonan",
+                xaxis=dict(tickvals=list(range(1, 13)),
+                           ticktext=list(MAPPING_BULAN.values())),
+                legend=dict(orientation='h', y=-0.2),
+            )
+            st.plotly_chart(fig_mlp, use_container_width=True)
+
+            # ── Metrik evaluasi ───────────────────────────────────────
+            m1, m2, m3 = st.columns(3)
+            m1.metric("RMSE",  f"{rmse_mlp:.2f}")
+            m2.metric("MAE",   f"{mae_mlp:.2f}")
+            m3.metric("Iterasi Konvergen", mlp.n_iter_)
+
+            # ── Tabel forecast ────────────────────────────────────────
+            st.markdown("##### 📋 Tabel Hasil Forecast")
+            df_fc_tbl = pd.DataFrame({
+                "Bulan": nama_fc,
+                "Prediksi Permohonan": [round(v) for v in forecast_only],
+            })
+            st.dataframe(df_fc_tbl, use_container_width=True)
+
+            # ── Penjelasan arsitektur ─────────────────────────────────
+    # ─────────────────────────────────────────────────────────────────
+    # DL-TAB 2 · Regularisasi & Training Curve
+    # ─────────────────────────────────────────────────────────────────
+    with dl_tab2:
+        if len(pb_monthly) < 5:
+            st.warning("Data tidak cukup untuk eksperimen regularisasi.")
+        else:
+            df_reg = pb_monthly.copy()
+            df_reg['lag_1'] = df_reg['jumlah'].shift(1)
+            df_reg['lag_2'] = df_reg['jumlah'].shift(2)
+            df_reg['mav_3'] = df_reg['jumlah'].rolling(3, min_periods=1).mean().shift(1)
+            df_reg = df_reg.dropna()
+
+            X_reg = df_reg[['bulan', 'lag_1', 'lag_2', 'mav_3']].values
+            y_reg = df_reg['jumlah'].values
+            sx    = MinMaxScaler(); sy = MinMaxScaler()
+            Xr    = sx.fit_transform(X_reg)
+            yr    = sy.fit_transform(y_reg.reshape(-1, 1)).ravel()
+
+            # ── Slider regularisasi ───────────────────────────────────
+            col_r1, col_r2 = st.columns(2)
+            with col_r1:
+                alpha_val = st.select_slider(
+                    "Alpha L2 Regularisasi",
+                    options=[0.0, 0.0001, 0.001, 0.01, 0.1],
+                    value=0.0001,
+                )
+            with col_r2:
+                use_early = st.checkbox("Gunakan Early Stopping", value=True)
+                val_frac  = st.slider("Validation Fraction", 0.1, 0.3, 0.2, 0.05,
+                                      disabled=not use_early)
+
+            # ── 3 Konfigurasi: No-reg, L2, L2+EarlyStopping ──────────
+            configs = {
+                "Tanpa Regularisasi": dict(
+                    alpha=0.0, early_stopping=False, max_iter=500),
+                f"L2 (α={alpha_val})": dict(
+                    alpha=alpha_val, early_stopping=False, max_iter=500),
+                f"L2 + Early Stopping": dict(
+                    alpha=alpha_val, early_stopping=use_early,
+                    validation_fraction=val_frac, max_iter=500),
+            }
+
+            fig_lc, ax_lc = plt.subplots(figsize=(10, 4))
+            reg_results = []
+
+            for label, params in configs.items():
+                m_reg = MLPRegressor(
+                    hidden_layer_sizes=(32, 16),
+                    activation='relu',
+                    solver='adam',
+                    random_state=42,
+                    learning_rate_init=0.001,
+                    **params,
+                )
+                m_reg.fit(Xr, yr)
+                loss_curve = m_reg.loss_curve_
+                ax_lc.plot(loss_curve, label=f"{label} ({len(loss_curve)} iter)")
+
+                y_p  = sy.inverse_transform(m_reg.predict(Xr).reshape(-1, 1)).ravel()
+                rmse = np.sqrt(mean_squared_error(y_reg, y_p))
+                mae  = mean_absolute_error(y_reg, y_p)
+                reg_results.append({
+                    "Konfigurasi": label,
+                    "Iterasi": len(loss_curve),
+                    "RMSE": round(rmse, 2),
+                    "MAE":  round(mae, 2),
+                    "Loss Akhir": round(loss_curve[-1], 6),
+                })
+
+            ax_lc.set_xlabel("Epoch (Iterasi)")
+            ax_lc.set_ylabel("Loss (MSE)")
+            ax_lc.set_title("Training Loss Curve – Perbandingan Regularisasi")
+            ax_lc.legend()
+            ax_lc.grid(True, alpha=0.4)
+            plt.tight_layout()
+            st.pyplot(fig_lc)
+            plt.close()
+
+            # ── Tabel perbandingan ────────────────────────────────────
+            st.subheader("📋 Perbandingan Hasil Regularisasi")
+            df_reg_tbl = pd.DataFrame(reg_results)
+            st.dataframe(df_reg_tbl, use_container_width=True)
+
+    # ─────────────────────────────────────────────────────────────────
+    # DL-TAB 3 · Autoencoder Anomaly Detection
+    # ─────────────────────────────────────────────────────────────────
+    with dl_tab3:
+        if len(pb_monthly) < 4:
+            st.warning("Data tidak cukup untuk Autoencoder (minimal 4 bulan).")
+        else:
+            # ── Siapkan data ──────────────────────────────────────────
+            df_ae = pb_monthly.copy()
+            df_ae['lag_1']   = df_ae['jumlah'].shift(1).fillna(method='bfill')
+            df_ae['lag_2']   = df_ae['jumlah'].shift(2).fillna(method='bfill')
+            df_ae['mav_3']   = df_ae['jumlah'].rolling(3, min_periods=1).mean()
+            df_ae['growth']  = df_ae['jumlah'].pct_change().fillna(0)
+
+            features_ae = ['jumlah', 'lag_1', 'lag_2', 'mav_3', 'growth']
+            X_ae_raw    = df_ae[features_ae].values
+            scaler_ae   = MinMaxScaler()
+            X_ae        = scaler_ae.fit_transform(X_ae_raw)
+
+            # ── Slider threshold & bottleneck ─────────────────────────
+            col_ae1, col_ae2 = st.columns(2)
+            with col_ae1:
+                bottleneck = st.selectbox("Ukuran Bottleneck (dimensi laten)", [1, 2, 3], index=1)
+            with col_ae2:
+                threshold_pct = st.slider(
+                    "Threshold Anomali (persentil reconstruction error)", 50, 95, 75
+                )
+
+            # ── Simulasi Autoencoder dengan MLP (Encoder + Decoder) ───
+            # Encoder: 5 → bottleneck, Decoder: bottleneck → 5
+            n_feat = X_ae.shape[1]
+
+            # Encoder
+            enc = MLPRegressor(
+                hidden_layer_sizes=(bottleneck,),
+                activation='relu',
+                solver='adam',
+                max_iter=500,
+                random_state=42,
+                learning_rate_init=0.001,
+            )
+            # Fit encoder (input → compressed)
+            enc.fit(X_ae, X_ae[:, :bottleneck])
+            X_encoded = enc.predict(X_ae)
+
+            # Decoder (compressed → reconstructed)
+            if bottleneck == 1:
+                X_enc_in = X_encoded.reshape(-1, 1)
+            else:
+                X_enc_in = np.column_stack([X_encoded] * min(bottleneck, X_encoded.ndim))
+                X_enc_in = X_enc_in[:, :bottleneck] if X_enc_in.shape[1] >= bottleneck else X_enc_in
+
+            dec = MLPRegressor(
+                hidden_layer_sizes=(n_feat * 2,),
+                activation='relu',
+                solver='adam',
+                max_iter=500,
+                random_state=42,
+            )
+            dec.fit(X_enc_in, X_ae)
+            X_reconstructed = dec.predict(X_enc_in)
+
+            # ── Reconstruction Error per sampel ───────────────────────
+            recon_error = np.mean((X_ae - X_reconstructed) ** 2, axis=1)
+            threshold   = np.percentile(recon_error, threshold_pct)
+            anomaly_idx = np.where(recon_error > threshold)[0]
+
+            df_ae['reconstruction_error'] = recon_error
+            df_ae['anomali'] = recon_error > threshold
+            df_ae['nama_bulan'] = df_ae['bulan'].map(MAPPING_BULAN)
+
+            # ── Plot reconstruction error ─────────────────────────────
+            fig_ae = go.Figure()
+            fig_ae.add_trace(go.Bar(
+                x=df_ae['nama_bulan'],
+                y=df_ae['reconstruction_error'],
+                marker_color=[
+                    'crimson' if a else 'steelblue'
+                    for a in df_ae['anomali']
+                ],
+                name='Reconstruction Error',
+            ))
+            fig_ae.add_hline(
+                y=threshold,
+                line_dash='dash',
+                line_color='orange',
+                annotation_text=f"Threshold ({threshold_pct}th pct) = {threshold:.4f}",
+            )
+            fig_ae.update_layout(
+                title="Autoencoder – Reconstruction Error per Bulan",
+                xaxis_title="Bulan",
+                yaxis_title="Reconstruction Error (MSE)",
+                showlegend=False,
+            )
+            st.plotly_chart(fig_ae, use_container_width=True)
+
+            # ── Tabel anomali ─────────────────────────────────────────
+            st.subheader("🚨 Bulan Terdeteksi Anomali")
+            df_anomali = df_ae[df_ae['anomali']][
+                ['nama_bulan', 'jumlah', 'reconstruction_error']
+            ].copy()
+            df_anomali.columns = ['Bulan', 'Jumlah Permohonan', 'Reconstruction Error']
+            df_anomali['Reconstruction Error'] = df_anomali['Reconstruction Error'].round(6)
+
+            if df_anomali.empty:
+                st.info("Tidak ada anomali terdeteksi pada threshold saat ini.")
+            else:
+                st.dataframe(df_anomali, use_container_width=True)
+                for _, row in df_anomali.iterrows():
+                    st.warning(
+                        f"⚠️ **{row['Bulan']}** — {int(row['Jumlah Permohonan']):,} permohonan "
+                        f"(error: {row['Reconstruction Error']:.5f})"
+                    )
+
+            # ── Representasi laten (encoded) ──────────────────────────
+            st.subheader("🔵 Visualisasi Ruang Laten (Representasi Terkompresi)")
+            if bottleneck >= 2:
+                fig_lat = px.scatter(
+                    x=X_encoded[:, 0] if X_encoded.ndim > 1 else X_encoded,
+                    y=X_encoded[:, 1] if (X_encoded.ndim > 1 and X_encoded.shape[1] > 1)
+                      else recon_error,
+                    color=['Anomali' if a else 'Normal' for a in df_ae['anomali']],
+                    text=df_ae['nama_bulan'],
+                    color_discrete_map={'Anomali': 'crimson', 'Normal': 'steelblue'},
+                    title="Ruang Laten Autoencoder (Dimensi 1 vs 2)",
+                    labels={'x': 'Latent Dim 1', 'y': 'Latent Dim 2'},
+                )
+                fig_lat.update_traces(textposition='top center')
+                st.plotly_chart(fig_lat, use_container_width=True)
+            else:
+                fig_lat1d = px.scatter(
+                    x=df_ae['nama_bulan'],
+                    y=X_encoded if X_encoded.ndim == 1 else X_encoded[:, 0],
+                    color=['Anomali' if a else 'Normal' for a in df_ae['anomali']],
+                    color_discrete_map={'Anomali': 'crimson', 'Normal': 'steelblue'},
+                    title="Representasi Laten 1D per Bulan",
+                    labels={'x': 'Bulan', 'y': 'Nilai Laten'},
+                )
+                st.plotly_chart(fig_lat1d, use_container_width=True)
 
 # ───────────────────────────────────────────
 # TAB 2 – JENIS TRANSAKSI
