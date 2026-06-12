@@ -503,8 +503,8 @@ with tab1:
         else:
             # ── Siapkan data ──────────────────────────────────────────
             df_ae = pb_monthly.copy()
-            df_ae['lag_1']   = df_ae['jumlah'].shift(1).fillna(method='bfill')
-            df_ae['lag_2']   = df_ae['jumlah'].shift(2).fillna(method='bfill')
+            df_ae['lag_1']   = df_ae['jumlah'].shift(1).bfill()
+            df_ae['lag_2']   = df_ae['jumlah'].shift(2).bfill()
             df_ae['mav_3']   = df_ae['jumlah'].rolling(3, min_periods=1).mean()
             df_ae['growth']  = df_ae['jumlah'].pct_change().fillna(0)
 
